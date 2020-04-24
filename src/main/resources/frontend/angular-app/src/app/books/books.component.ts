@@ -10,14 +10,6 @@ import { BookService } from '../book.service';
 export class BooksComponent implements OnInit {
 
   selectedBook: Book;
-
-  book: Book = {
-    id: 1,
-    title: "Hyperion",
-    author: "Dan Simons",
-    description: "Best scifi evör"
-  }
-
   books: Book[];
 
   constructor(private bookService: BookService) { }
@@ -30,7 +22,7 @@ export class BooksComponent implements OnInit {
     this.selectedBook = book;
   }
 
-  getBooks(): void {
+  public getBooks(): void {
     this.bookService.getBooks().subscribe(books => this.books = books);
   }
 

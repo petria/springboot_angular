@@ -1,22 +1,21 @@
-<h2>{{book.title | uppercase}} [{{book.id}}]</h2>
+<table>
+  <tr>
+    <td>
+      <div class="left_pane">
+        <ul class="books">
+          <li *ngFor="let book of books"
+              [class.selected]="book === selectedBook"
+              (click)="onSelect(book)">
+            <span class="badge">{{book.id}}</span>{{book.title}}
+          </li>
+        </ul>
+      </div>
+    </td>
+    <td>
+      <div class="right_pane">
+        <app-book-detail [book]="selectedBook"></app-book-detail>
+      </div>
+    </td>
+  </tr>
+</table>
 
-<!--<div>
-  <label>title:
-    <input [(ngModel)]="book.title" placeholder="title"/>
-  </label>
-</div>
-<div>author: <span>{{book.author}}</span></div>
-<div>description: <span>{{book.description}}</span></div>
--->
-
-<h2>Books list</h2>
-
-<ul class="books">
-  <li *ngFor="let book of books"
-      [class.selected]="book === selectedBook"
-      (click)="onSelect(book)">
-    <span class="badge">{{book.id}}</span>{{book.title}}
-  </li>
-</ul>
-
-<app-book-detail [book]="selectedBook"></app-book-detail>
