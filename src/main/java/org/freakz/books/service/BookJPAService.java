@@ -7,6 +7,7 @@ import org.freakz.books.model.BookModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -19,6 +20,7 @@ public class BookJPAService implements BookService {
     private final BookRepository repository;
 
     @Override
+    @Transactional
     public Collection<BookModel> getBooks() {
         return repository.findAll()
                 .stream()
@@ -27,18 +29,22 @@ public class BookJPAService implements BookService {
     }
 
     @Override
+    @Transactional
     public BookModel updateBook(BookModel bookModel) {
         Book book = mapDtoToEntity(bookModel);
         return mapEntityToDTO(repository.save(book));
     }
 
     @Override
+    @Transactional
     public BookModel createBook(BookModel bookModel) {
         Book book = mapDtoToEntity(bookModel);
+        book.setId(null);
         return mapEntityToDTO(repository.save(book));
     }
 
     @Override
+    @Transactional
     public Boolean deleteBook(int bookId) {
         repository.deleteById(bookId);
         return true;
